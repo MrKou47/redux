@@ -41,8 +41,11 @@ export default function createStore(reducer, preloadedState, enhancer) {
     if (typeof enhancer !== 'function') {
       throw new Error('Expected the enhancer to be a function.')
     }
-
-    return enhancer(createStore)(reducer, preloadedState) //递归创建store
+    /**
+     * 如果有enhancer参数，则在 enhancer 中调用调用此方法后，使用middleware包装dispatch，最后返回的是
+     * store对象，但是此store对象的 dispatch 方法是经过包装过的dispatch
+     */
+    return enhancer(createStore)(reducer, preloadedState)
   }
 
   if (typeof reducer !== 'function') {

@@ -5,11 +5,12 @@ function bindActionCreator(actionCreator, dispatch) {
 }
 
 /**
+ * type ActionCreator = (...args: any) => Action | AsyncAction
  * Turns an object whose values are action creators, into an object with the
  * same keys, but with every function wrapped into a `dispatch` call so they
  * may be invoked directly. This is just a convenience method, as you can call
  * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
- *
+ * 
  * For convenience, you can also pass a single function as the first argument,
  * and get a function in return.
  *
@@ -24,6 +25,9 @@ function bindActionCreator(actionCreator, dispatch) {
  * every action creator wrapped into the `dispatch` call. If you passed a
  * function as `actionCreators`, the return value will also be a single
  * function.
+ * 
+ * 返回一个对象，当你执行方法的时候就已经dispatch了
+ * 具体可以看 http://cn.redux.js.org/docs/api/bindActionCreators.html 和 http://cn.redux.js.org/docs/Glossary.html#action-creator
  */
 export default function bindActionCreators(actionCreators, dispatch) {
   if (typeof actionCreators === 'function') {
